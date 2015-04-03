@@ -9,13 +9,24 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (nonatomic, strong) UIDynamicAnimator *animator;
+@property (nonatomic, strong) UIView *ball;
+
 
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    self.ball = [[UIView alloc] initWithFrame:CGRectMake(100,100,40,40)];
+    self.ball.backgroundColor = [UIColor redColor];
+    [self.view addSubview:self.ball];
+    
+    self.animator = [UIDynamicAnimator new];
+    
+    UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.ball]];
+    [self.animator addBehavior:gravity];
+//    [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
