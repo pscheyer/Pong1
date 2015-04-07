@@ -15,6 +15,7 @@
 		D38737DF1ACCE08F002707DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38737DD1ACCE08F002707DF /* LaunchScreen.xib */; };
 		D38737EB1ACCE090002707DF /* Pong1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D38737EA1ACCE090002707DF /* Pong1Tests.m */; };
 		D38737F61ACE2EDF002707DF /* Paddle.m in Sources */ = {isa = PBXBuildFile; fileRef = D38737F51ACE2EDF002707DF /* Paddle.m */; };
+		D387382B1AD35046002707DF /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = D387382A1AD35046002707DF /* Ball.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		D38737EA1ACCE090002707DF /* Pong1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pong1Tests.m; sourceTree = "<group>"; };
 		D38737F41ACE2EDF002707DF /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
 		D38737F51ACE2EDF002707DF /* Paddle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Paddle.m; sourceTree = "<group>"; };
+		D38738291AD35046002707DF /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
+		D387382A1AD35046002707DF /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				D38737D61ACCE08F002707DF /* ViewController.m */,
 				D38737F41ACE2EDF002707DF /* Paddle.h */,
 				D38737F51ACE2EDF002707DF /* Paddle.m */,
+				D38738291AD35046002707DF /* Ball.h */,
+				D387382A1AD35046002707DF /* Ball.m */,
 				D38737D81ACCE08F002707DF /* Main.storyboard */,
 				D38737DB1ACCE08F002707DF /* Images.xcassets */,
 				D38737DD1ACCE08F002707DF /* LaunchScreen.xib */,
@@ -224,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D387382B1AD35046002707DF /* Ball.m in Sources */,
 				D38737D71ACCE08F002707DF /* ViewController.m in Sources */,
 				D38737F61ACE2EDF002707DF /* Paddle.m in Sources */,
 				D38737D41ACCE08F002707DF /* AppDelegate.m in Sources */,

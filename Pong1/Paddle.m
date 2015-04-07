@@ -22,6 +22,7 @@
     
     self = [super init];
     
+    self.backgroundColor = [UIColor blueColor];
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panFired:)];
     [self addGestureRecognizer:self.panGesture];
     
@@ -43,7 +44,7 @@
     if (recognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [recognizer translationInView:self];
         
-        NSLog(@"New Paddle1 Movement: %@", NSStringFromCGPoint(translation));
+        NSLog(@"New Paddle Movement: %@", NSStringFromCGPoint(translation));
         
         if ([self.delegate respondsToSelector:@selector(paddle:didTryToPanWithOffset:)]) {
             [self.delegate paddle:self didTryToPanWithOffset:translation];
