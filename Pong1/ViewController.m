@@ -46,6 +46,13 @@
     
     [self ballGenerator];
     
+    UIBezierPath *centerLine = [UIBezierPath bezierPath];
+    [[UIColor blackColor] setStroke];
+    
+    [centerLine moveToPoint:CGPointMake(0.0, CGRectGetMaxY(self.view.frame) / 2)];
+    [centerLine addLineToPoint:CGPointMake(CGRectGetMaxX(self.view.frame), CGRectGetMaxY(self.view.frame) / 2)];
+    [centerLine closePath];
+    
     
     CGFloat paddle1Y = 7 * CGRectGetMaxY(self.view.bounds) / 8;
     CGFloat paddle2Y = CGRectGetMaxY(self.view.bounds) / 8;
@@ -91,7 +98,7 @@
     
     //mover for paddle2
     //methodology is: log ball position .1 seconds ago and move to match. Will tweak arbitrary .1 when testing game.
-    [Ball addObserver:self forKeyPath:@"ballCenterPast" options:0 context:nil];
+//    [Ball addObserver:self forKeyPath:@"ballCenterPast" options:0 context:nil];
     
     
     //pusher for starting ball
@@ -105,15 +112,9 @@
     [self.animator addBehavior:self.pusher];
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+//    
+    NSTimer *ballTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(reportBallPosition) userInfo:nil repeats:YES];
     
-//    NSMethodSignature *ballTimerSignature = [NSMutableArray instanceMethodSignatureForSelector:@selector(addObject:)];
-//    NSInvocation *ballTimerInvocation = [NSInvocation invocationWithMethodSignature:ballTimerSignature];
-//    [ballTimerInvocation setTarget:self.ballCenters];
-//    [ballTimerInvocation setSelector:@selector(addObject:)];
-//    [ballTimerInvocation setArgument:self.ball.center atIndex:0];
-//    
-//    NSTimer *ballTimer = [[NSTimer scheduledTimerWithTimeInterval:.1 invocation:@selector(ballCenterReporter) repeats:YES];
-//    
 }
 
 - (void) paddle:(Paddle *)paddle didTryToPanWithOffset:(CGPoint)offset {
@@ -142,19 +143,32 @@
     [self.view addSubview:self.ball];
 }
 
--(void) ballCenterReporter{
+-(void) reportBallPosition {
     self.ballCenter = self.ball.center;
     self.ballCenters = [[NSMutableArray alloc] init];
-    if (self.ballCenters.count < 10) {
+//    if (self.ballCenters.count < 10) {
         [self.ballCenters addObject:[NSValue valueWithCGPoint:self.ball.center]];
-    } else {
+//    } else {
         NSValue *val = [self.ballCenters objectAtIndex:0];
         self.ballCenterPast = [val CGPointValue];
-        [self.ballCenters removeObject:0];
-        
-        NSLog(@"Current Ball Center: %@", [self.ballCenters objectAtIndex:9]);
-        NSLog(@"Ball Center Sent to AI Paddle: %@", [self.ballCenters objectAtIndex:0]);
+//        [self.ballCenters removeObject:0];
+    
+    CGPoint startingPoint = _paddle2.frame.origin;
+    
+    CGFloat ballCenterX = self.ballCenterPast.x;
+    
+    CGRect potentialNewPaddleFrame = CGRectMake(ballCenterX, CGRectGetMaxY(self.view.bounds) / 8, CGRectGetWidth(_paddle2.frame), CGRectGetHeight(_paddle2.frame));
+    
+    if(CGRectContainsRect(self.view.bounds, potentialNewPaddleFrame)) {
+        _paddle2.frame = potentialNewPaddleFrame;
     }
+//    self.paddle2.Center = paddle2.frame.origin;
+    
+    [self.animator updateItemUsingCurrentState:self.paddle2];
+    
+//        NSLog(@"Current Ball Center: %@", [self.ballCenters objectAtIndex:9]);
+        NSLog(@"Ball Center Sent to AI Paddle: %@", [self.ballCenters objectAtIndex:0]);
+//    }
     
     NSLog(@"Ball Counter: %lu", (unsigned long)self.ballCenters.count);
 }
