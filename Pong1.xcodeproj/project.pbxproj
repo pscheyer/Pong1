@@ -426,6 +426,7 @@
 				D38737F01ACCE090002707DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D38737F11ACCE090002707DF /* Build configuration list for PBXNativeTarget "Pong1Tests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +435,7 @@
 				D38737F31ACCE090002707DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -134,7 +134,7 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     //
-    _ballTimer = [NSTimer scheduledTimerWithTimeInterval:.2 target:self selector:@selector(reportBallPosition) userInfo:nil repeats:YES];
+    _ballTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(reportBallPosition) userInfo:nil repeats:YES];
     
     _scoreAndNewGameTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(updateScoreAndNewGame) userInfo:nil repeats:YES];
     
@@ -147,7 +147,7 @@
 #pragma mark - Ball Methods
 
 - (void) ballGenerator {
-    self.ball = [[Ball alloc] initWithFrame:CGRectMake(100,200,40,40)];
+    self.ball = [[Ball alloc] initWithFrame:CGRectMake(100,80,40,40)];
     self.ball.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.ball];
 }
