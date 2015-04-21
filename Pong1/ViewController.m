@@ -81,11 +81,11 @@
     self.paddle2 = [[Paddle alloc] init];
     
     
-    self.paddle1.frame = CGRectMake(CGRectGetMaxX(self.view.bounds) / 2 - (CGRectGetMaxX(self.view.bounds) / 3) / 2, paddle1Y, CGRectGetMaxX(self.view.bounds) / 3, CGRectGetMaxY(self.view.bounds) / 16);
+    self.paddle1.frame = CGRectMake(CGRectGetMaxX(self.view.bounds) / 2 - (CGRectGetMaxX(self.view.bounds) / 3) / 2, paddle1Y, CGRectGetMaxX(self.view.bounds) / 4, CGRectGetMaxY(self.view.bounds) / 16);
     [self.view addSubview:self.paddle1];
     self.paddle1.delegate = self;
     
-    self.paddle2.frame = CGRectMake(CGRectGetMaxX(self.view.bounds) / 2 - (CGRectGetMaxX(self.view.bounds) / 3) / 2, paddle2Y, CGRectGetMaxX(self.view.bounds) / 3, CGRectGetMaxY(self.view.bounds) / 16);
+    self.paddle2.frame = CGRectMake(CGRectGetMaxX(self.view.bounds) / 2 - (CGRectGetMaxX(self.view.bounds) / 3) / 2, paddle2Y, CGRectGetMaxX(self.view.bounds) / 4, CGRectGetMaxY(self.view.bounds) / 16);
     [self.view addSubview:self.paddle2];
     self.paddle2.delegate = self;
     
@@ -123,7 +123,7 @@
     
     //pusher for starting ball
     self.pusher = [[UIPushBehavior alloc] initWithItems:@[self.ball] mode:UIPushBehaviorModeInstantaneous];
-    self.pusher.pushDirection = CGVectorMake(0.5, 1.0);
+    self.pusher.pushDirection = CGVectorMake(0.0, -0.75);
     self.pusher.active = YES;
     [self.animator addBehavior:self.pusher];
     
@@ -134,20 +134,22 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     //
-    _ballTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(reportBallPosition) userInfo:nil repeats:YES];
+    _ballTimer = [NSTimer scheduledTimerWithTimeInterval:.2 target:self selector:@selector(reportBallPosition) userInfo:nil repeats:YES];
     
     _scoreAndNewGameTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(updateScoreAndNewGame) userInfo:nil repeats:YES];
+    
+//    _existentialTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(existentialTimerMethod) userInfo:nil repeats:YES];
     
     _resetGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_resetGameButton addTarget:self action:@selector(resetGameButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [_resetGameButton setTitle:@"Again?" forState:UIControlStateNormal];
-    _resetGameButton.frame = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, 100, 100);
+    _resetGameButton.frame = CGRectMake(self.paddle1.frame.origin.x, self.paddle1.frame.origin.y, self.paddle1.bounds.size.width, self.paddle1.bounds.size.height);
 }
 
 #pragma mark - Ball Methods
 
 - (void) ballGenerator {
-    self.ball = [[Ball alloc] initWithFrame:CGRectMake(100,80,40,40)];
+    self.ball = [[Ball alloc] initWithFrame:CGRectMake(100,80,30,30)];
     self.ball.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.ball];
 }
@@ -240,10 +242,10 @@
     CGFloat centerHeight = self.view.bounds.size.height / 2;
     
     _player1ScoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, centerHeight + 10, 100, 100)];
-    _player1ScoreLabel.text = [[NSString alloc]initWithFormat:@"P1:%.f",_player1Score];
+    _player1ScoreLabel.text = [[NSString alloc]initWithFormat:@"%.f",_player1Score];
     
     _aiPlayerScoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, centerHeight - 100, 100, 100)];
-    _aiPlayerScoreLabel.text = [[NSString alloc]initWithFormat:@"AI:%.f",_aiPlayerScore];
+    _aiPlayerScoreLabel.text = [[NSString alloc]initWithFormat:@"%.f",_aiPlayerScore];
     
     
     [self.view addSubview:_player1ScoreLabel];
@@ -260,7 +262,9 @@
     [self allViewDidLoadExceptSuper];
 }
 
-
+- (void) existentialTimerMethod {
+    
+}
 
 #pragma mark - Collision Behaviors
 
